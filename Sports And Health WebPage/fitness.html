@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Document</title>
+    <style>
+        body{
+          background-image:url("https://pixabay.com/videos/id-15791/");
+          text-align: center;
+
+        }
+        .navbar {
+          background-color: #333;
+          height: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .nav-list {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .nav-item {
+          margin: 0 10px;
+          position: relative;
+        }
+
+        .nav-item a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-item:hover a {
+          background-color: #fff;
+          color: #333;
+          border-radius: 5px;
+          transform: translateY(-5px);
+      }
+
+        .nav-item::before {
+          content: "";
+          position: absolute;
+          top: -5px;
+          left: 0;
+          height: 5px;
+          width: 100%;
+          background-color: #fff;
+          transform: perspective(5px) rotateX(2deg);
+          transform-origin: center;
+          transition: all 0.3s ease-in-out;
+      }
+
+        .nav-item:hover::before {
+          transform: perspective(5px) rotateX(0deg);
+          transform-origin: center;
+          height: 10px;
+      }
+        .liku {
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateX(30deg);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            padding: 50px;
+            background-color: rgb(14, 60, 80);
+        }
+
+        #introduction {
+            background-color: rgb(82, 205, 154);
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        #introduction h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px rgb(0, 0, 0);
+        }
+
+        #introduction p {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-bottom: 30px;
+        }
+
+        #workouts {
+          background-color: rgb(87, 194, 240);
+          padding: 80px 0;
+        }
+
+        #workouts h2 {
+          font-size: 36px;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        #workouts p {
+          font-size: 18px;
+          margin-bottom: 40px;
+          text-align: center;
+        }
+
+        .workout-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-gap: 10px;
+        }
+
+        .workout-card {
+          background-color: rgb(16, 139, 191);
+          border-radius: 5px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          text-align: center;
+        }
+
+        .workout-card img {
+          border-radius: 5px;
+          margin-bottom: 10px;
+          max-width: 80%;
+        }
+
+        .workout-card h3 {
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+
+        .workout-card p {
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+
+        .workout-card a {
+          background-color: #FF69B4;
+          border-radius: 20px;
+          color: #fff;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-decoration: none;
+        }
+
+        .workout-card a:hover {
+          background-color: #ff4785;
+        }
+
+
+        /* Style the header */
+        .ab {
+          
+          color: #fff;
+          padding: 20px;
+          text-align: center;
+          background-color: #f1f1f1
+        }
+
+        /* Style the navigation menu */
+        nav {
+          background-color: 	rgb(62, 124, 139);
+          padding: 0.001em;
+          color: #f1f1f1;
+        }
+
+        nav ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        nav ul li {
+          display: inline-block;
+          margin-right: 20px;
+        }
+
+        nav ul li a {
+          color: #333;
+          text-decoration: none;
+        }
+
+        nav ul li a:hover {
+          color: #fff;
+          background-color: #333;
+        }
+
+        /* Style the main content area */
+        main {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+
+        /* Style the welcome section */
+        section:first-of-type {
+          background-color: #fff;
+          border: 1px solid #ccc;
+          margin-bottom: 20px;
+          padding: 20px;
+        }
+
+        /* Style the forum posts section */
+        .forum-posts {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .forum-post {
+          background-color: rgb(255, 255, 255);
+          border: 1px solid #ccc;
+          flex: 1;
+          margin: 10px;
+          padding: 10px;
+        }
+
+        .forum-post h3 a {
+          color: #333;
+        }
+
+        .forum-post .username {
+          font-weight: bold;
+        }
+
+        /* Style the events section */
+        .events {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .event {
+          background-color: #fff;
+          border: 1px solid #ccc;
+          flex: 1;
+          margin: 10px;
+          padding: 10px;
+        }
+
+        .event h3 {
+          margin-top: 0;
+        }
+
+        .event .date {
+          font-weight: bold;
+        }
+
+        .event .btn {
+          background-color: #333;
+          border: none;
+          color: #fff;
+          padding: 5px 10px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 14px;
+          margin-top: 10px;
+          cursor: pointer;
+        }
+
+        .event .btn:hover {
+          background-color: rgb(85, 85, 85);
+        }
+        /* Style the news section */
+        .news {
+          background-color: rgb(140, 131, 131);
+          border: 1px solid rgb(0, 0, 0);
+          margin-bottom: 20px;
+          padding: 20px;
+        }
+
+        .news h2 {
+          margin-top: 0;
+        }
+
+        /* Style the news articles */
+        .news article {
+          margin-bottom: 20px;
+        }
+
+        .news article h3 {
+          margin-top: 0;
+        }
+
+        .news article p {
+          margin-bottom: 10px;
+        }
+
+        .news article a {
+          background-color: #333;
+          border: none;
+          color: #fff;
+          padding: 5px 10px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 14px;
+          cursor: pointer;
+        }
+
+        .news article a:hover {
+          background-color: #555;
+        }
+
+        #registration {
+          background-color: #f5f5f5;
+          padding: 5px;
+          margin-top: 20px;
+        }
+
+        #registration h2 {
+          font-size: 40px;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+
+        #registration form {
+          display:inline-table;
+          flex-direction:column;
+          align-items: left;
+        }
+
+        .form-group {
+          display:inline-block;
+          flex-direction: row;
+          margin-bottom: 10px;
+          width: 40%;
+        }
+
+        .form-group label {
+          font-size: 14px;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+          padding: 5px;
+          font-size: 15px;
+          border:#22716c;
+          border-radius: 5px;
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="password"]:focus {
+          outline: none;
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        button[type="submit"] {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          padding: 5px 15px;
+          text-align: center;
+          text-decoration: none;
+          
+          font-size: 18px;
+          font-weight: bold;
+          margin-top: 30px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          transform-style: preserve-3d;
+          perspective: 1000px;
+        }
+
+        button[type="submit"]:hover {
+          background-color: #008CBA;
+          transform: translateZ(20px);
+        }
+
+    </style>
+</head>
+<body class="">
+  <div>
+  <center>
+  <nav class="navbar">
+    <ul class="nav-list">
+        <li class="nav-item"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+        </svg></a></li>
+        <li class="nav-item"><a href="#">Workouts</a></li>
+        <li class="nav-item"><a href="#">Nutrition</a></li>
+        <li class="nav-item"><a href="#">Gear</a></li>
+        <li class="nav-item"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+          <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+        </svg></a></li>
+        <li class="nav-item"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg></a></li>
+
+    </ul>
+  </nav>
+      </center>
+    <section id="introduction">
+        <div class="container">
+            <div class="liku">
+                <h1>Welcome to Fitness and Sports</h1>
+                <p>At Fitness and Sports, we believe that regular exercise and participation in sports can help individuals achieve optimal health and wellness. Our website is dedicated to providing information and resources on a variety of fitness and sports-related topics, from workout routines to healthy eating habits.</p>
+                <p>Explore our website to find helpful tips, inspiring stories, and practical advice on how to live a healthy and active lifestyle. Whether you're a seasoned athlete or just getting started on your fitness journey, we have something for everyone.</p>
+              </div>
+            </div>
+      </section>
+      <section id="workouts">
+        <div class="container">
+          <h2>Workouts</h2>
+          <p>Get inspired and try out some of our favorite workout routines:</p>
+          <div class="workout-grid">
+            <div class="workout-card">
+              <img src="https://i0.wp.com/www.experimentsinwellness.com/wp-content/uploads/2020/04/hiit-workout-at-home-2.jpg?fit=1200%2C965&ssl=1&resize=350%2C200" alt="Workout 1">
+              <h3>Full-Body HIIT Workout</h3>
+              <p>A high-intensity interval training workout that targets your entire body and gets your heart pumping.</p>
+              <a href="#">Learn More</a>
+            </div>
+            <div class="workout-card">
+              <img src="https://i0.wp.com/fitonapp.com/wp-content/uploads/shutterstock_473389459-scaled.jpg?fit=1200%2C801&ssl=1&resize=350%2C200" alt="Workout 2">
+              <h3>Yoga for Strength and Flexibility</h3>
+              <p>A yoga routine that focuses on building both strength and flexibility in the body.</p>
+              <a href="#">Learn More</a>
+            </div>
+            <div class="workout-card">
+              <img src="https://i.ytimg.com/vi/W8wM5pQk8Nc/maxresdefault.jpg" alt="Workout 3">
+              <h3>30-Minute Cardio Blast</h3>
+              <br>
+              <p>A quick and intense cardio workout that you can do anytime, anywhere.</p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </section>
+        <header>
+          <nav>
+          <nav class="navbar navbar-expand-md navbar-dark">
+            <a class="navbar-brand navbar-dark " href="#">Fitness Gear</a>
+            
+          </nav>
+          <div>
+            <h1 class="display-4">Gear and Equipment for Fitness</h1>
+            <p class="lead">Find the best gear and equipment to help you achieve your fitness goals.</p>
+          </div>
+        </header>
+        <main class="container">
+          <section class="gear-section">
+            <h2>Running Gear</h2>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card">
+                  <img class="card-img-top" src="https://static.vecteezy.com/system/resources/thumbnails/001/816/622/small/close-up-of-running-shoes-on-road-free-photo.jpg" alt="Running Shoes">
+                  <div class="card-body">
+                    <h5 class="card-title">Running Shoes</h5>
+                    <p class="card-text">Choose the right pair of running shoes to help prevent injury and improve your performance.</p>
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img class="card-img-top" src="https://health.clevelandclinic.org/wp-content/uploads/sites/3/2021/05/RunningPostCOVID-545634760-770x533-1-300x200.jpg" alt="Running Clothes">
+                  <div class="card-body">
+                    <h5 class="card-title">Running Clothes</h5>
+                    <p class="card-text">Comfortable and breathable clothes are essential for a successful run.</p>
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card">
+                  <img class="card-img-top" src="https://img.einnews.com/medium/269467/running-gear-market-report.jpeg" alt="Running Accessories">
+                  <div class="card-body">
+                    <h5 class="card-title">Running Accessories</h5>
+                    <p class="card-text">Accessories like armbands and hydration belts can help make your run more comfortable and enjoyable.</p>
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                  </div>
+                </div>
+              </div>
+           </div>
+          </section>
+                    <section class="gear-section">
+                        <h2>Yoga Gear</h2>
+                        <div class="row">
+                         <div class="col-md-4">
+                           <div class="card">
+                             <img class="card-img-top" src="https://img.freepik.com/free-photo/full-shot-woman-exercising-yoga-mat-indoors_23-2149356905.jpg?auto=format&h=200" alt="Yoga Mat">
+                        <div class="card-body">
+                            <h5 class="card-title">Yoga Mat</h5>
+                              <p class="card-text">A good yoga mat will provide cushioning and support for your joints and help you maintain balance during poses.</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <img class="card-img-top" src="https://igniteyogadayton.com/wp-content/uploads/2021/06/yoga-studio-dayton-yoga-studio-300x200.jpg" alt="Yoga Clothes">
+                                <div class="card-body">
+                                  <h5 class="card-title">Yoga Clothes</h5>
+                                  <p class="card-text">Comfortable, stretchy clothes that allow for a full range of motion are important for a successful yoga practice.</p>
+                                  <a href="#" class="btn btn-primary">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                              <img class="card-img-top" src="data:image/jpeg;base64,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" alt="Yoga Accessories">
+                              <div class="card-body">
+                                <h5 class="card-title">Yoga Accessories</h5>
+                                <p class="card-text">Some popular yoga accessories include yoga mats, blocks, straps, blankets, and bolsters.</p>
+                                
+                                <a href="#" class="btn btn-primary">Learn More</a>
+                              </div>
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+                    <section class="gear-section">
+                    <h2>Strength Training Gear</h2>
+                    <div class="row">
+                          <div class="col-md-4">
+                              <div class="card">
+                                <img class="card-img-top" src="https://img.freepik.com/premium-photo/bunch-fitness-training-weights-blue-background-colorful-dumbbells-shelf-kettlebell-gymnastic-roller_116124-10634.jpg?auto=format&h=200" alt="Dumbbells">
+                                <div class="card-body">
+                                  <h5 class="card-title">Dumbbells</h5>
+                                  <p class="card-text">Dumbbells are a versatile piece of equipment that can be used for a variety of exercises.</p>
+                                  <a href="#" class="btn btn-primary">Learn More</a>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="https://cdn.mypowerlife.com/wp-content/uploads/2020/08/114016652_s-300x200.jpg" alt="Resistance Bands">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Resistance Bands</h5>
+                                        <p class="card-text">Resistance bands are a portable and affordable option for strength training at home or on the go.</p>
+                                        <a href="#" class="btn btn-primary">Learn More</a>
+                                      </div>
+                                </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="card">
+                              <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Dxp5DpKUBXn775gnVFLph3s24-wcyi9_zAcbybq3JdO4U6tizGNkrLgSD8f5RHLcNZI&usqp=CAU" alt="Kettlebells">
+                              <div class="card-body">
+                                <h5 class="card-title">Kettlebells</h5>
+                                <p class="card-text">Kettlebells can be used for a variety of exercises and can help improve overall strength and endurance.</p>
+                                <a href="#" class="btn btn-primary">Learn More</a>
+                              </div>
+                            </div>
+                          </div>
+                  </div>
+                </section>
+                
+              </div>
+              
+              <!-- Bootstrap JavaScript -->
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+              <div style="background-color:rgb(6, 107, 103);">
+              <header>
+                <h1 style="color:white;"><center>Fitness Community</center></h1>
+              </header class="ab">
+               <main style="background-color:rgb(11, 216, 186);">
+                <section>
+                  <h2>Welcome to our Community!</h2>
+                  <p>Our fitness community is a great place to connect with other fitness enthusiasts, share your fitness journey, and find support and encouragement along the way. Whether you're just getting started or you're a seasoned pro, we welcome you to our community.</p>
+                </section>
+                <section>
+                  <h2>Recent Forum Posts</h2>
+                  <div class="forum-posts">
+                    <div class="forum-post">
+                      <h3><a href="#">Question about protein powders</a></h3>
+                      <p>Posted by <span class="username">FitnessFan22</span> on 3/1/2023</p>
+                      <p>Hey everyone, I'm new to using protein powders and I'm wondering if anyone has any recommendations or tips on how to use them effectively. Thanks in advance!</p>
+                    </div>
+                    <div class="forum-post">
+                      <h3><a href="#">How to stay motivated during the winter months?</a></h3>
+                      <p>Posted by <span class="username">RunnerGirl85</span> on 2/28/2023</p>
+                      <p>With the cold weather and shorter days, I'm finding it hard to stay motivated to keep up with my workouts. Any tips on how to stay motivated during the winter months?</p>
+                    </div>
+                  </div>
+                </section>
+                <section>
+                  <h2>Upcoming Events</h2>
+                  <div class="events">
+                    <div class="event">
+                      <h3>Yoga in the Park</h3>
+                      <p><span class="date">March 5, 2023</span> at <span class="time">9:00 AM</span></p>
+                      <p>Join us for a morning yoga session in the park. All levels welcome!</p>
+                      <a href="#" class="btn">Learn More</a>
+                    </div>
+                    <div class="event">
+                      <h3>5K Fun Run</h3>
+                      <p><span class="date">March 12, 2023</span> at <span class="time">10:00 AM</span></p>
+                      <p>Join us for a fun 5K run through the park. All ages and fitness levels welcome!</p>
+                      <a href="#" class="btn">Learn More</a>
+                    </div>
+                  </div>
+                </section>
+               </main>
+              </header>
+            </div>
+              <div  style="padding-top:2%">
+              <section class="news" >
+                <h2>News and Updates</h2>
+                <article>
+                  <h3>Study Finds That Exercise Boosts Brain Function in Older Adults</h3>
+                  <p>A recent study published in the Journal of the American Geriatrics Society found that regular exercise can improve brain function in older adults. The study involved over 1,000 participants, and those who engaged in regular exercise had better cognitive function than those who were sedentary.</p>
+                  <a href="#">Read More &rarr;</a>
+                </article>
+                <article>
+                  <h3>10 Foods That Will Boost Your Energy During Workouts</h3>
+                  <p>If you're looking for a way to boost your energy during workouts, consider incorporating these 10 foods into your diet. From bananas to quinoa, these foods are packed with nutrients that can help you power through your workouts and recover more quickly.</p>
+                  <a href="#">Read More &rarr;</a>
+                </article>
+                <article>
+                  <h3>The Rise of Virtual Fitness Classes</h3>
+                  <p>With the pandemic forcing gyms and fitness studios to close their doors, many people have turned to virtual fitness classes to stay in shape. From Zoom yoga classes to Peloton workouts, virtual fitness has become more popular than ever before.</p>
+                  <a href="#">Read More &rarr;</a>
+                </article>
+              </section>
+              </div>
+              <section id="registration">
+                <div class="container">
+                  <h2>Registration</h2>
+                  <form>
+                    <div class="form-group">
+                      <label for="name">Name:</label>
+                      <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email:</label>
+                      <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password:</label>
+                      <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="confirm_password">Confirm Password:</label>
+                      <input type="password" id="confirm_password" name="confirm_password" required>
+                    </div>
+                    <br>
+                    <button type="submit">Register</button>
+                  </form>
+                </div>
+              </section>
+              <footer class="bg-dark text-white">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <h5 class="text-success">About Us</h5>
+                      <p>We are a fitness and sports center that offers a wide range of programs and classes to help you achieve your health and fitness goals.</p>
+                    </div>
+                    
+                    <div class="col-md-3 col-sm-6">
+                      <h5 class="text-success">Connect with Us</h5>
+                      <ul class="list-styled text-success">
+                        <li><a href="#"><i class="fa fa-facebook "></i> Facebook</a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fa fa-youtube"></i> YouTube</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <h5 class="text-success">Contact Us</h5>
+                      <ul class="list-style">
+                        <li><i class="fa fa-map-marker"></i> 123 Main Street, BBSR town INDIA</li>
+                        <li><i class="fa fa-phone"></i> (+91)0000-000-000</li>
+                        <li><i class="fa fa-envelope"></i> info@fitnessandsports.com</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-dark text-white py-3">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <p>&copy; 2023 Fitness and Sports. </p>
+                      </div>
+                      <div class="col-md-6 text-md-right">
+                        <p>Designed by <a href="#">Sachidananda Tripathy</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </footer> 
+            </div>         
+    </body>
+</html>
